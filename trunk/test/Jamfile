@@ -1,0 +1,60 @@
+#
+#   Copyright (c) 2004 João Abecasis
+#
+#   Distributed under the Boost Software License, Version 1.0. (See
+#   accompanying file LICENSE_1_0.txt or copy at
+#   http://www.boost.org/LICENSE_1_0.txt)
+#
+
+import breeze-testing : test ;
+
+project test ;
+
+test-suite "breeze.default" :
+    [ test compile : default ]
+    ;
+
+test-suite "breeze.empty_storage" :
+    [ test run : empty_storage_pass ]
+    [ test run-fail : empty_storage_fail ]
+    ;
+
+test-suite "breeze.static_assert" :
+    [ test compile : static_assert_pass ]
+    [ test compile-fail : static_assert_fail ]
+    ;
+
+test-suite "breeze.base.crtp" :
+    [ test run : crtp_pass ]
+    [ test compile-fail : crtp_fail ]
+    ;
+
+test-suite "breeze.base.safe_bool" :
+    [ test run : safe_bool_pass ]
+    [ test compile-fail : safe_bool_fail_1 ]
+    [ test compile-fail : safe_bool_fail_2 ]
+    [ test compile-fail : safe_bool_fail_3 ]
+    [ test compile-fail : safe_bool_fail_4 ]
+    [ test compile-fail : safe_bool_fail_5 ]
+    [ test compile-fail : safe_bool_fail_6 ]
+    [ test compile-fail : safe_bool_fail_7 ]
+    [ test compile-fail : safe_bool_fail_8 ]
+    ;
+
+test-suite "breeze.debug.count_instances" :
+    [ test run : count_instances_pass ]
+    [ test run-fail : count_instances_fail_1 ]
+    [ test run-fail : count_instances_fail_2 ]
+    [ test run-fail : count_instances_fail_3 ]
+    ;
+
+test-suite "breeze.debug.counter" :
+    [ test run : counter_pass ]
+    [ test run-fail : counter_fail_1 ]
+    [ test run-fail : counter_fail_2 ]
+    ;
+
+test-suite "breeze.debug.instrumented" :
+    [ test run : instrumented_pass_1 ]
+    [ test run : instrumented_pass_2 ]
+    ;
