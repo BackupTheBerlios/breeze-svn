@@ -58,3 +58,7 @@ test-suite "breeze.debug.instrumented" :
     [ test run : instrumented_pass_1 ]
     [ test run : instrumented_pass_2 ]
     ;
+
+test-suite "breeze.debug.unused_variable" :
+    [ test compile : unused_variable_pass ]
+    ;
