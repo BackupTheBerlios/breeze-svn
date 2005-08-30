@@ -11,6 +11,7 @@
 //  Test-type: compile
 //
 //  Ensure unused_variable does not perform unnecessary copies.
+//  FIXME: The test should also ensure no warnings are generated.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
