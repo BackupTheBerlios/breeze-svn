@@ -16,7 +16,6 @@
 #include <boost/call_traits.hpp>
 #include <boost/utility/base_from_member.hpp>
 
-#include <boost/mpl/if.hpp>
 #include <boost/mpl/apply.hpp>
 
 #include <map>
@@ -45,9 +44,8 @@ namespace breeze {
         : breeze::debug::instrumented<empty_storage<T, Dummy, LambdaStore> >
     {
     private:
-        typedef typename boost::mpl::if_<is_default<LambdaStore>,
-            detail::empty_storage_default_store, LambdaStore>::type
-                lambda_store_type;
+        typedef typename filter_default<LambdaStore,
+            detail::empty_storage_default_store>::type lambda_store_type;
 
         typedef typename boost::mpl::apply<lambda_store_type, empty_storage
             const *, T>::type store_type;

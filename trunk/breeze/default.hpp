@@ -9,6 +9,7 @@
 #if !defined(BREEZE_DEFAULT_HPP_INCLUDED)
 #define BREEZE_DEFAULT_HPP_INCLUDED
 
+#include <boost/mpl/if.hpp>
 #include <boost/mpl/bool.hpp>
 
 namespace breeze {
@@ -28,6 +29,12 @@ namespace breeze {
     template <>
     struct is_default<default_>
         : boost::mpl::true_
+    {
+    };
+
+    template <class T, class DefaultT>
+    struct filter_default
+        : boost::mpl::if_<is_default<T>, DefaultT, T>
     {
     };
 

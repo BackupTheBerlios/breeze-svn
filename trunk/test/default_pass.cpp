@@ -10,12 +10,14 @@
 //
 //  Type: compile-pass
 //
-//  Verify breeze::is_default.
+//  Verify breeze::is_default and breeze::filter_default.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <breeze/static_assert.hpp>
 #include <breeze/default.hpp>
+#include <breeze/static_assert.hpp>
+
+#include <boost/type_traits/is_same.hpp>
 
 void test()
 {
@@ -23,4 +25,10 @@ void test()
         fundamental_error, default_not_recognized_as_default);
     BREEZE_STATIC_ASSERT(!breeze::is_default<struct something_else>::value,
         fundamental_error, non_default_recognized_as_default);
+
+    BREEZE_STATIC_ASSERT((boost::is_same<breeze::filter_default<
+        breeze::default_, double >::type, double>::value), fundamental_error,
+        filter_default_not_working);
+    BREEZE_STATIC_ASSERT((boost::is_same<breeze::filter_default<int, double
+        >::type, int>::value), fundamental_error, filter_default_not_working);
 }
