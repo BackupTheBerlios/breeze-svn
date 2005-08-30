@@ -11,7 +11,7 @@ import breeze-testing : test ;
 project test ;
 
 test-suite "breeze.default" :
-    [ test compile : default ]
+    [ test compile : default_pass ]
     ;
 
 test-suite "breeze.empty_storage" :
