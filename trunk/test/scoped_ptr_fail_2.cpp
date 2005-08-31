@@ -10,6 +10,8 @@
 //
 //  Type: run-fail
 //
+//  breeze::scoped_ptr asserts on attempt to dereference singular pointer.
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifdef NDEBUG
