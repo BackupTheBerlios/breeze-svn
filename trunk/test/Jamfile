@@ -62,3 +62,7 @@ test-suite "breeze.debug.instrumented" :
 test-suite "breeze.debug.unused_variable" :
     [ test compile : unused_variable_pass ]
     ;
+
+test-suite "breeze.detail.trivial_iterator_tag" :
+    [ test compile : trivial_iterator_tag_pass ]
+    ;
