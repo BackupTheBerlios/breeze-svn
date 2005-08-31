@@ -22,6 +22,7 @@ test-suite "breeze.empty_storage" :
 test-suite "breeze.scoped_ptr" :
     [ test run : scoped_ptr_pass_1 ]
     [ test run : scoped_ptr_pass_2 ]
+    [ test run : scoped_ptr_pass_3 ]
     [ test run-fail : scoped_ptr_fail_1 ]
     [ test run-fail : scoped_ptr_fail_2 ]
     ;
