@@ -62,6 +62,8 @@ namespace breeze {
         typedef void_ difference_type;
         typedef detail::trivial_iterator_tag iterator_category;
 
+        typedef boost::compressed_pair<pointer, deleter_type> data_type;
+
     public:
 
         explicit scoped_ptr(
@@ -116,6 +118,16 @@ namespace breeze {
             swap(this->data_, other.data_);
         }
 
+        typename data_type::second_reference get_deleter()
+        {
+            return data_.second();
+        }
+
+        typename data_type::second_const_reference get_deleter() const
+        {
+            return data_.second();
+        }
+
     private:
         void clear()
         {
@@ -125,7 +137,7 @@ namespace breeze {
             }
         }
 
-        boost::compressed_pair<pointer, deleter_type> data_;
+        data_type data_;
     };
 
     template <class T, class P, class R, class D>
