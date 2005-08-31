@@ -19,6 +19,13 @@ test-suite "breeze.empty_storage" :
     [ test run-fail : empty_storage_fail ]
     ;
 
+test-suite "breeze.scoped_ptr" :
+    [ test run : scoped_ptr_pass_1 ]
+    [ test run : scoped_ptr_pass_2 ]
+    [ test run-fail : scoped_ptr_fail_1 ]
+    [ test run-fail : scoped_ptr_fail_2 ]
+    ;
+
 test-suite "breeze.static_assert" :
     [ test compile : static_assert_pass ]
     [ test compile-fail : static_assert_fail ]
