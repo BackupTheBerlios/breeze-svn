@@ -10,6 +10,7 @@
 #define BREEZE_DEBUG_COUNTER_HPP_INCLUDED
 
 #include <boost/detail/atomic_count.hpp>
+#include <boost/cstdint.hpp>
 #include <boost/assert.hpp>
 
 #include <cstddef>
@@ -24,12 +25,12 @@ namespace breeze { namespace debug {
         {
         }
 
-        operator long () const
+        operator boost::int32_t () const
         {
             return counter_;
         }
 
-        long get() const
+        boost::int32_t get() const
         {
             return counter_;
         }

@@ -12,6 +12,7 @@
 //
 //  Tests basic operations of breeze::debug::counter and verifies correctness of
 //  its count.
+//  Tests increment up to largest boost::int32_t.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -20,6 +21,9 @@
 #endif
 
 #include <breeze/debug/counter.hpp>
+
+#include <boost/cstdint.hpp>
+#include <boost/integer_traits.hpp>
 
 #include <cstddef>
 #include <cassert>
@@ -47,4 +51,14 @@ int main()
     counter1.decrement();
     assert(0 == counter1);
     assert(50 == counter2);
+
+    breeze::debug::counter<> counter3;
+    assert(0 == counter3);
+
+    for (std::size_t i = 0; i < boost::integer_traits<boost::int32_t>::const_max; ++i)
+        counter3.increment();
+
+    assert(0 == counter1);
+    assert(50 == counter2);
+    assert(boost::integer_traits<boost::int32_t>::const_max == counter3);
 }
