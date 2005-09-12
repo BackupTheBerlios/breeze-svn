@@ -26,7 +26,7 @@ namespace breeze {
 
         struct empty_storage_default_store
         {
-            template <typename T0, typename T1>
+            template <class T0, class T1>
             struct apply
             {
                 typedef std::map<T0, T1> type;
