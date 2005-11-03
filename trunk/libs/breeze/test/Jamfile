@@ -74,7 +74,8 @@ test-suite "breeze.debug.limit_instances" :
     ;
 
 test-suite "breeze.debug.unused_variable" :
-    [ test compile : unused_variable_pass ]
+    [ test compile : unused_variable_pass : <warnings>all <warnings-as-errors>on ]
+    [ test compile-fail : unused_variable_fail : <warnings>all <warnings-as-errors>on ]
     ;
 
 test-suite "breeze.detail.trivial_iterator_tag" :

@@ -9,9 +9,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Test-type: compile
+//  Requirements: <warnings>all <warnings-as-errors>on
 //
+//  Ensure warnings are not generated for wrapped unused variables.
 //  Ensure unused_variable does not perform unnecessary copies.
-//  FIXME: The test should also ensure no warnings are generated.
+//
+//  Note: This test is meaningful only when unused_variable_fail fails, as
+//  expected.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,8 +32,16 @@ int main()
 {
     non_copyable nc;
     non_copyable const ncc;
+    non_copyable volatile vcc;
+    non_copyable const volatile cvcc;
 
-    //breeze::debug::unused_variable(non_copyable());
+    int unused;
+
+    // This one tries to copy the argument
+    // breeze::debug::unused_variable(non_copyable());
+
     breeze::debug::unused_variable(nc);
     breeze::debug::unused_variable(ncc);
+
+    breeze::debug::unused_variable(unused);
 }
