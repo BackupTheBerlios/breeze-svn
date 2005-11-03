@@ -8,16 +8,16 @@
 
 import testing ;
 
-rule test ( command : test-name : sources * )
+rule test ( command : test-name : requirements * : sources * )
 {
     sources ?= $(test-name).cpp ;
 
     if ( $(command) in compile compile-fail )
     {
-        return [ $(command) $(sources) : : $(test-name) ] ;
+        return [ $(command) $(sources) : $(requirements) : $(test-name) ] ;
     }
     else
     {
-        return [ $(command) $(sources) : : : : $(test-name) ] ;
+        return [ $(command) $(sources) : : : $(requirements) : $(test-name) ] ;
     }
 }
