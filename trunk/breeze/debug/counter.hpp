@@ -37,12 +37,14 @@ namespace breeze { namespace debug {
 
         void increment()
         {
+            BOOST_ASSERT((boost::int32_t)(counter_ + 1) > counter_
+                && "Counter overflow.");
             ++counter_;
-            BOOST_ASSERT(counter_ > 0 && "Counter overflow.");
         }
 
         void decrement()
         {
+            BOOST_ASSERT(counter_ - 1 < counter_ && "Counter underflow.");
             BOOST_ASSERT(counter_ > 0 && "Counter underflow.");
             --counter_;
         }
