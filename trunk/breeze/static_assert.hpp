@@ -70,9 +70,11 @@
 
 #endif
 
-//  FIXME: Joel de Guzman reported an ICE on VC7.1 while using
-//  BREEZE_STATIC_ASSERT. The suggested fix however broke the use of the
-//  facility inside templates. I'll just have to look into it once again.
+//  FIXME: Joel de Guzman reported an ICE on VC7.1 compiling
+//  static_assert_pass.cpp. The suggested fix however broke the use of the
+//  facility inside templates and this slipped because there was a bug in the
+//  test case... Of course the ICE could also be due to the bug in the test,
+//  which has since been fixed.
 namespace breeze {
 
     // Having this outside the detail namespace improves readability of error

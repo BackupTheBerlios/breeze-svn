@@ -18,7 +18,7 @@
 
 namespace breeze { namespace debug {
 
-    template <typename Tag = void>
+    template <class Tag = void>
     struct count_instances
         : instrumented<count_instances<Tag> >
     {
@@ -54,7 +54,7 @@ namespace breeze { namespace debug {
         static live_counter_type live_count_;
     };
 
-    template <typename D>
+    template <class D>
     typename count_instances<D>::live_counter_type
         count_instances<D>::live_count_;
 

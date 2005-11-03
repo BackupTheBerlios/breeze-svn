@@ -15,7 +15,7 @@
 
 namespace breeze { namespace debug {
 
-    template <typename Tag = void>
+    template <class Tag = void>
     struct unique_identifier
     //  FIXME: What operations do we guarantee on identifier_type? What about on
     //      unique_identifier itself?

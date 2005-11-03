@@ -12,7 +12,7 @@
 namespace breeze { namespace debug {
 
     //  Supress unused variable warnings
-    template <typename T>
+    template <class T>
     inline void unused_variable(T const &)
     {
     }

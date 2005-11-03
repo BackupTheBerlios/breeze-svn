@@ -33,7 +33,7 @@ namespace breeze { namespace debug {
     //          using instrumented<Derived>::after_destructor;
     //          using instrumented<Derived>::before_constructor;
     //
-    template <typename Derived = void>
+    template <class Derived = void>
     struct instrumented
         : breeze::base::crtp<instrumented<Derived>, Derived>
     {

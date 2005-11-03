@@ -14,7 +14,7 @@
 
 namespace breeze { namespace debug {
 
-    template <typename Tag = void>
+    template <class Tag = void>
     struct track_instances
     //  FIXME: Should we provide a way to iterate over all object instances?
         : unique_identifier<track_instances<Tag> >

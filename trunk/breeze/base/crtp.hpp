@@ -58,7 +58,7 @@ namespace breeze { namespace base {
             }
         };
 
-        template <typename Deriving>
+        template <class Deriving>
         struct crtp<Deriving, void>
         {
         protected:

@@ -35,7 +35,7 @@ namespace breeze {
             //  To avoid ADL issues base classes are placed in their own
             //  namespaces
 
-            template <typename T>
+            template <class T>
             struct safe_bool;
 
         } // namespace safe_bool_base_aux_ns
@@ -46,9 +46,9 @@ namespace breeze {
 
     class safe_bool_core_access
     {
-        template <typename T> friend struct base::safe_bool;
+        template <class T> friend struct base::safe_bool;
 
-        template <typename T>
+        template <class T>
         static bool operator_safe_bool(T const & t)
         {
             return t.operator_safe_bool();
@@ -57,7 +57,7 @@ namespace breeze {
 
     namespace base { namespace safe_bool_base_aux_ns {
 
-        template <typename T>
+        template <class T>
         struct safe_bool
             : crtp<safe_bool<T>, T>
         {
@@ -84,7 +84,7 @@ namespace breeze {
             }
         };
 
-        template <typename T1, typename T2>
+        template <class T1, class T2>
         bool operator==(safe_bool<T1> const &, safe_bool<T2> const &)
         {
 
@@ -94,7 +94,7 @@ namespace breeze {
             return false;
         }
 
-        template <typename T1,typename T2>
+        template <class T1, class T2>
         bool operator!=(safe_bool<T1> const &, safe_bool<T2> const &)
         {
             BREEZE_STATIC_ASSERT(false, invalid_use_of_operator,
