@@ -67,6 +67,12 @@ test-suite "breeze.debug.instrumented" :
     [ test run : instrumented_pass_2 ]
     ;
 
+test-suite "breeze.debug.limit_instances" :
+    [ test run : limit_instances_pass_1 ]
+    [ test run : limit_instances_pass_2 ]
+    [ test run-fail : limit_instances_fail ]
+    ;
+
 test-suite "breeze.debug.unused_variable" :
     [ test compile : unused_variable_pass ]
     ;
