@@ -9,24 +9,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  Type: run-fail
+//  Requirements: <warnings>on <warnings-as-errors>on
 //
-//  breeze::debug::counter asserts on overflow.
-//
-//  Note: This test may take a while to complete. The program enters an infinite
-//  loop while incrementing the counter.
+//  Make sure no warnings are generated when breeze::debug::never is used in
+//  control statements. Make sure breeze::debug::never produces assertion
+//  failures.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifdef NDEBUG
-#   undef NDEBUG
-#endif
+#include <breeze/debug/never.hpp>
 
-#include <breeze/debug/counter.hpp>
-#include <breeze/debug/always.hpp>
+#include <cassert>
 
 int main()
 {
-    breeze::debug::counter<> counter;
-    while (breeze::debug::always)
-        counter.increment();
+    assert(breeze::debug::never && "Test passed.");
 }

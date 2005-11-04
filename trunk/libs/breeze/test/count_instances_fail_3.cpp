@@ -23,6 +23,7 @@
 #endif
 
 #include <breeze/debug/count_instances.hpp>
+#include <breeze/debug/always.hpp>
 
 #include <boost/utility/addressof.hpp>
 
@@ -30,8 +31,6 @@
 #include <boost/type_traits/aligned_storage.hpp>
 
 #include <memory> // for placement new
-
-static bool always = true;
 
 int main()
 {
@@ -44,7 +43,7 @@ int main()
 
     test_type * const p = reinterpret_cast<test_type *>(boost::addressof(buffer));
 
-    while (always)
+    while (breeze::debug::always)
     {
         new (p) test_type();
     }

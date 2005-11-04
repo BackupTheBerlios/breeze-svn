@@ -21,10 +21,9 @@
 
 #include <breeze/debug/limit_instances.hpp>
 #include <breeze/debug/unused_variable.hpp>
+#include <breeze/debug/never.hpp>
 
 #include <cassert>
-
-static bool never = false;
 
 template <long int MaxInstances, class Tag = void>
 struct throw_on_max_instances
@@ -100,7 +99,7 @@ int main()
     {
         test_type t[11];
 
-        assert(never && "Test failed!");
+        assert(breeze::debug::never && "Test failed.");
 
         breeze::debug::unused_variable(t);
     }
