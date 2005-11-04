@@ -17,6 +17,7 @@
 
 namespace breeze { namespace test {
 
+    ////////////////////////////////////////////////////////////////////////////
     struct safe_bool
         : breeze::base::safe_bool<safe_bool>
     {
@@ -28,6 +29,7 @@ namespace breeze { namespace test {
         bool value;
     };
 
+    ////////////////////////////////////////////////////////////////////////////
     struct safe_bool_with_compare
         : breeze::base::safe_bool<safe_bool_with_compare>
     {
@@ -51,6 +53,7 @@ namespace breeze { namespace test {
         return !(lhs == rhs);
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     struct safe_bool_with_compare_equal
         : breeze::base::safe_bool<safe_bool_with_compare_equal>
     {
@@ -68,6 +71,7 @@ namespace breeze { namespace test {
         return (lhs.value == rhs.value);
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     struct safe_bool_with_compare_not_equal
         : breeze::base::safe_bool<safe_bool_with_compare_not_equal>
     {
@@ -85,6 +89,7 @@ namespace breeze { namespace test {
         return (lhs.value == rhs.value);
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     template <class T>
     static void test_bool_testable()
     {
@@ -113,7 +118,34 @@ namespace breeze { namespace test {
     }
 
     template <class T>
-    static void test_assign_int()
+    static void test_int_comparable()
+    {
+        T t;
+        int i = 55;
+
+        t.value = true;
+
+        t == i;
+        i == t;
+
+        t != i;
+        i != t;
+
+        t < i;
+        i < t;
+
+        t > i;
+        i > t;
+
+        t <= i;
+        i <= t;
+
+        t >= i;
+        i >= t;
+    }
+
+    template <class T>
+    static void test_assign_to_int()
     {
         T t;
         int i;

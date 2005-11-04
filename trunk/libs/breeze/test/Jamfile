@@ -47,6 +47,7 @@ test-suite "breeze.base.safe_bool" :
     [ test compile-fail : safe_bool_fail_6 ]
     [ test compile-fail : safe_bool_fail_7 ]
     [ test compile-fail : safe_bool_fail_8 ]
+    [ test compile-fail : safe_bool_fail_9 ]
     ;
 
 test-suite "breeze.debug.count_instances" :

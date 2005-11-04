@@ -1,5 +1,5 @@
 //
-//  Copyright (c) 2004, 2005 João Abecasis
+//  Copyright (c) 2005 João Abecasis
 //
 //  Distributed under the Boost Software License, Version 1.0. (See
 //  accompanying file LICENSE_1_0.txt or copy at
@@ -18,5 +18,5 @@ using namespace breeze::test;
 
 int main()
 {
-    test_assign_to_int<safe_bool>();
+    test_int_comparable<safe_bool>();
 }
