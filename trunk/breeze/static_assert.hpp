@@ -20,7 +20,7 @@
 
 #   define BREEZE_STATIC_ASSERT(expr, title, message)                           \
                                                                                 \
-    struct BOOST_PP_CAT(error_on_line_, __LINE__)                               \
+    struct BOOST_PP_CAT(static_assertion_, __LINE__)                            \
     {                                                                           \
         struct title                                                            \
         {                                                                       \
@@ -34,7 +34,7 @@
     enum                                                                        \
     {                                                                           \
         BOOST_PP_CAT(assertion_result_for_line_, __LINE__) =                    \
-            sizeof(BOOST_PP_CAT(error_on_line_, __LINE__)                       \
+            sizeof(BOOST_PP_CAT(static_assertion_, __LINE__)                    \
                 ::check(::breeze::detail::static_assert< (expr) >())            \
             )                                                                   \
     }
@@ -43,7 +43,7 @@
 
 #   define BREEZE_STATIC_ASSERT(expr, title, message)                           \
                                                                                 \
-    struct BOOST_PP_CAT(error_on_line_, __LINE__)                               \
+    struct BOOST_PP_CAT(static_assertion_, __LINE__)                            \
     {                                                                           \
         struct title                                                            \
         {                                                                       \
@@ -63,7 +63,7 @@
     enum                                                                        \
     {                                                                           \
         BOOST_PP_CAT(assertion_result_for_line_, __LINE__) =                    \
-            sizeof(BOOST_PP_CAT(error_on_line_, __LINE__)                       \
+            sizeof(BOOST_PP_CAT(static_assertion_, __LINE__)                    \
                 ::title::message(                                               \
                     ::breeze::detail::static_assert< (expr) >()))               \
     }
