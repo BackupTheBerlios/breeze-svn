@@ -19,11 +19,17 @@
 
 #include <boost/type_traits/is_same.hpp>
 
+namespace {
+
+    struct something_else;
+
+}
+
 void test()
 {
     BREEZE_STATIC_ASSERT(breeze::is_default<breeze::default_>::value,
         fundamental_error, default_not_recognized_as_default);
-    BREEZE_STATIC_ASSERT(!breeze::is_default<struct something_else>::value,
+    BREEZE_STATIC_ASSERT(!breeze::is_default<something_else>::value,
         fundamental_error, non_default_recognized_as_default);
 
     BREEZE_STATIC_ASSERT((boost::is_same<breeze::filter_default<

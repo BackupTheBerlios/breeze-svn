@@ -84,25 +84,18 @@ namespace breeze { namespace test {
     }
 
     template <class T>
-    void test_bool_testable()
+    static void test_bool_testable()
     {
         T t1, t2;
         t1.value = true;
         t2.value = false;
 
-        if (!t1)
-        {
-            assert(false);
-        }
-
-        if (t2)
-        {
-            assert(false);
-        }
+        assert((bool)t1);
+        assert((bool)!t2);
     }
 
     template <class T1, class T2>
-    void test_comparable()
+    static void test_comparable()
     {
         T1 t1;
         T2 t2;
@@ -110,21 +103,15 @@ namespace breeze { namespace test {
         t1.value = true;
         t2.value = false;
 
-        if (t1 == t2)
-        {
-            assert(false);
-        }
+        assert(t1 != t2);
 
         t2.value = true;
 
-        if (t1 != t2)
-        {
-            assert(false);
-        }
+        assert(t1 == t2);
     }
 
     template <class T>
-    void test_assign_int()
+    static void test_assign_int()
     {
         T t;
         int i;
@@ -133,7 +120,7 @@ namespace breeze { namespace test {
     }
 
     template <class T>
-    void test_less_than_operator()
+    static void test_less_than_operator()
     {
         T t1, t2;
 
@@ -141,7 +128,7 @@ namespace breeze { namespace test {
     }
 
     template <class T>
-    void test_left_shift_operator()
+    static void test_left_shift_operator()
     {
         T t;
 
@@ -149,7 +136,7 @@ namespace breeze { namespace test {
     }
 
     template <class T>
-    void test_delete()
+    static void test_delete()
     {
         T t;
 

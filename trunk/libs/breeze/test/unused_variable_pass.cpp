@@ -23,17 +23,22 @@
 
 #include <boost/noncopyable.hpp>
 
+struct construct_type {};
+
+const construct_type construct = construct_type();
+
 struct non_copyable
     : boost::noncopyable
 {
+    non_copyable(construct_type const &) { }
 };
 
 int main()
 {
-    non_copyable nc;
-    non_copyable const ncc;
-    non_copyable volatile vcc;
-    non_copyable const volatile cvcc;
+    non_copyable nc(construct);
+    non_copyable const ncc(construct);
+    non_copyable volatile vcc(construct);
+    non_copyable const volatile cvcc(construct);
 
     int unused;
 
