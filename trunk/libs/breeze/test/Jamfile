@@ -58,6 +58,11 @@ test-suite "breeze.base.safe_bool" :
     [ test compile-fail : safe_bool_fail_9 ]
     ;
 
+test-suite "breeze.debug.always_never" :
+    [ test run : always_never_pass ]
+    [ test run-fail : never_fail ]
+    ;
+
 test-suite "breeze.debug.count_instances" :
     [ test run : count_instances_pass ]
     [ test run-fail : count_instances_fail_1 ]
