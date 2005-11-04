@@ -23,9 +23,11 @@
 
 #include <breeze/debug/counter.hpp>
 
+static bool always = true;
+
 int main()
 {
     breeze::debug::counter<> counter;
-    while (true)
+    while (always)
         counter.increment();
 }

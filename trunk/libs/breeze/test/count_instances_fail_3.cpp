@@ -31,6 +31,8 @@
 
 #include <memory> // for placement new
 
+static bool always = true;
+
 int main()
 {
     typedef breeze::debug::count_instances<> test_type;
@@ -42,7 +44,7 @@ int main()
 
     test_type * const p = reinterpret_cast<test_type *>(boost::addressof(buffer));
 
-    while (true)
+    while (always)
     {
         new (p) test_type();
     }

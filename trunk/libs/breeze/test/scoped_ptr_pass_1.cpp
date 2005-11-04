@@ -22,7 +22,7 @@
 #include <algorithm>
 
 template <class T>
-void test_std_iterator_traits()
+static void test_std_iterator_traits()
 {
     typedef typename std::iterator_traits<T>::value_type value_type;
     typedef typename std::iterator_traits<T>::difference_type difference_type;

@@ -15,10 +15,16 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#ifdef NDEBUG
+#   undef NDEBUG
+#endif
+
 #include <breeze/debug/limit_instances.hpp>
 #include <breeze/debug/unused_variable.hpp>
 
-#include <boost/assert.hpp>
+#include <cassert>
+
+static bool never = false;
 
 template <long int MaxInstances, class Tag = void>
 struct throw_on_max_instances
@@ -94,7 +100,7 @@ int main()
     {
         test_type t[11];
 
-        BOOST_ASSERT(!"Test failed!");
+        assert(never && "Test failed!");
 
         breeze::debug::unused_variable(t);
     }

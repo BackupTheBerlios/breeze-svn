@@ -11,6 +11,8 @@
 
 #include <breeze/base/safe_bool.hpp>
 
+#include <breeze/debug/unused_variable.hpp>
+
 #include <cassert>
 
 namespace breeze { namespace test {
@@ -117,6 +119,9 @@ namespace breeze { namespace test {
         int i;
 
         i = t;
+
+        breeze::debug::unused_variable(i);
+        breeze::debug::unused_variable(t);
     }
 
     template <class T>
@@ -139,6 +144,8 @@ namespace breeze { namespace test {
     static void test_delete()
     {
         T t;
+
+        breeze::debug::unused_variable(t);
 
         delete t;
     }

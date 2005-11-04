@@ -22,7 +22,7 @@
 
 #include <cassert>
 
-int static_variable = 0;
+static int global_variable = 0;
 
 struct instrumented_constructor
     : breeze::debug::instrumented<instrumented_constructor>
@@ -32,7 +32,7 @@ protected:
 
     void before_constructor()
     {
-        static_variable += 20;
+        global_variable += 20;
     }
 };
 
@@ -44,7 +44,7 @@ protected:
 
     void after_destructor()
     {
-        static_variable /= 4;
+        global_variable /= 4;
     }
 };
 
@@ -56,40 +56,40 @@ struct instrumented_class
 
 int main()
 {
-    assert(static_variable == 0);
+    assert(global_variable == 0);
 
     {
         instrumented_class ic1, ic2, ic3, ic4;
-        assert(static_variable == 80);
+        assert(global_variable == 80);
     }
 
-    assert(static_variable == 0);
+    assert(global_variable == 0);
 
     {
         instrumented_class ic1, ic2;
-        assert(static_variable == 40);
+        assert(global_variable == 40);
 
         {
             instrumented_class ic;
-            assert(static_variable == 60);
+            assert(global_variable == 60);
         }
 
-        assert(static_variable == 15);
+        assert(global_variable == 15);
     }
 
-    assert(static_variable == 0);
+    assert(global_variable == 0);
 
     {
         instrumented_constructor ictor1;
-        assert(static_variable == 20);
+        assert(global_variable == 20);
     }
 
-    assert(static_variable == 20);
+    assert(global_variable == 20);
 
     {
         instrumented_destructor idtor1;
-        assert(static_variable == 20);
+        assert(global_variable == 20);
     }
 
-    assert(static_variable == 5);
+    assert(global_variable == 5);
 }

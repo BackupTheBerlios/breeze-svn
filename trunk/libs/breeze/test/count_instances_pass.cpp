@@ -34,7 +34,8 @@ struct counted_2
 {
 };
 
-template <typename T> void test(long n)
+template <class T>
+static void test(long n)
 {
     long const initial_count = T::live_count();
 

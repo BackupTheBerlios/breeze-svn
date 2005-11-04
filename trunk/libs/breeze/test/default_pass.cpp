@@ -25,7 +25,7 @@ namespace {
 
 }
 
-void test()
+int main()
 {
     BREEZE_STATIC_ASSERT(breeze::is_default<breeze::default_>::value,
         fundamental_error, default_not_recognized_as_default);

@@ -17,9 +17,13 @@
 
 #include "crtp_tests.hpp"
 
+#include <breeze/debug/unused_variable.hpp>
+
 using namespace breeze::test;
 
 int main()
 {
     bad_derived_class bdc;
+
+    breeze::debug::unused_variable(bdc);
 }
