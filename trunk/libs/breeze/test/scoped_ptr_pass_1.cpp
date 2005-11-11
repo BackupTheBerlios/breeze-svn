@@ -34,6 +34,10 @@ static void test_std_iterator_traits()
 
 struct test_exception {};
 
+// Intel compiler has trouble with function scope using declarations, so we put
+// this here.
+using std::swap;
+
 int main()
 {
     typedef breeze::debug::track_instances<> test_type;
@@ -42,10 +46,12 @@ int main()
 
     test_std_iterator_traits<pointer>();
 
-    try {
+    try
+    {
         pointer p(new test_type());
         throw test_exception();
-    } catch (test_exception &)
+    }
+    catch (test_exception &)
     {
     }
 
@@ -70,8 +76,6 @@ int main()
     }
 
     {
-        using std::swap;
-
         pointer p1(new test_type()), p2;
         p1->verify();
         swap(p1, p2);
