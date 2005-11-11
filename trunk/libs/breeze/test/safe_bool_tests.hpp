@@ -97,8 +97,15 @@ namespace breeze { namespace test {
         t1.value = true;
         t2.value = false;
 
-        assert((bool)t1);
-        assert((bool)!t2);
+        if (!t1)
+        {
+            assert(t1);
+        }
+        
+        if (t2)
+        {
+            assert(!t2);
+        }
     }
 
     template <class T1, class T2>
@@ -110,11 +117,17 @@ namespace breeze { namespace test {
         t1.value = true;
         t2.value = false;
 
-        assert(t1 != t2);
+        if (t1 == t2)
+        {
+            assert(t1 != t2);
+        }
 
         t2.value = true;
 
-        assert(t1 == t2);
+        if (t1 != t2)
+        {
+            assert(t1 == t2);
+        }
     }
 
     template <class T>

@@ -17,6 +17,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#ifdef NDEBUG
+#   undef NDEBUG
+#endif
+
 #include <breeze/debug/never.hpp>
 
 #include <cassert>
