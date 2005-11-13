@@ -27,6 +27,10 @@ test-suite "breeze.empty_storage" :
     [ test run-fail : empty_storage_fail ]
     ;
 
+test-suite "breeze.scoped_array" :
+    [ test run : scoped_array_pass ]
+    ;
+
 test-suite "breeze.scoped_ptr" :
     [ test run : scoped_ptr_pass_1 ]
     [ test run : scoped_ptr_pass_2 ]

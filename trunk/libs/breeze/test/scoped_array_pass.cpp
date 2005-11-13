@@ -10,16 +10,18 @@
 //
 //  Type: run-pass
 //
-//  Verify basic functionality of and proper cleanup of resources by scoped_ptr.
+//  Verify basic functionality of and proper cleanup of resources by
+//  scoped_array.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <breeze/scoped_ptr.hpp>
-#include <breeze/debug/track_instances.hpp>
-#include <breeze/debug/unused_variable.hpp>
+#ifdef NDEBUG
+#   undef NDEBUG
+#endif
 
-#include <iterator>
-#include <algorithm>
+#include <breeze/scoped_array.hpp>
+
+#include <breeze/debug/track_instances.hpp>
 
 #include "iterator_traits_test.hpp"
 
@@ -32,18 +34,17 @@ using std::swap;
 int main()
 {
     typedef breeze::debug::track_instances<> test_type;
-    typedef breeze::scoped_ptr<test_type> pointer;
-    typedef test_type * raw_pointer;
+    typedef breeze::scoped_array<test_type> pointer;
 
     breeze::test::std_iterator_traits<pointer>();
 
     {
-        pointer p1(new test_type()), p2;
+        pointer p1(new test_type[1]), p2;
     }
 
     try
     {
-        pointer p(new test_type());
+        pointer p(new test_type[2]);
         throw test_exception();
     }
     catch (test_exception &)
@@ -51,28 +52,25 @@ int main()
     }
 
     {
-        pointer p(new test_type());
-        delete p.release();
+        pointer p(new test_type[3]);
+        delete [] p.release();
     }
 
     {
-        pointer p(new test_type());
-        raw_pointer rp = p.get();
-
-        pointer::reference ref = *p;
-
-        breeze::debug::unused_variable(rp);
-        breeze::debug::unused_variable(ref);
-    }
-
-    {
-        pointer p(new test_type());
+        pointer p(new test_type[4]);
+        p.reset(new test_type[5]);
         p.reset();
     }
 
     {
-        pointer p1(new test_type()), p2;
-        p1->verify();
+        pointer p1(new test_type[6]), p2;
+
+        for (std::size_t i = 0; i < 6; ++i)
+            p1[i].verify();
+
         swap(p1, p2);
+
+        for (std::size_t i = 0; i < 6; ++i)
+            p2[i].verify();
     }
 }
