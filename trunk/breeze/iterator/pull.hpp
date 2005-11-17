@@ -11,16 +11,38 @@
 
 #include <breeze/static_assert.hpp>
 
+#include <boost/assert.hpp>
 #include <boost/utility/base_from_member.hpp>
+#include <boost/type_traits/is_convertible.hpp>
+
 #include <boost/iterator/iterator_adaptor.hpp>
 #include <boost/iterator/iterator_traits.hpp>
-#include <boost/tuple/tuple.hpp>
-#include <boost/assert.hpp>
+
+#include <boost/range/begin.hpp>
+#include <boost/range/end.hpp>
 
 #include <iterator>
 
 namespace breeze { namespace iterator {
 
+    namespace detail {
+
+        template <class Iterator, class Range>
+        inline void expand_range(Range const & range, Iterator & begin,
+            Iterator & end)
+        {
+            begin = boost::begin(range);
+            end = boost::end(range);
+        }
+
+    } // namespace detail
+
+    //
+    //  Requirements:
+    //
+    //      Iterator    - an Input Iterator
+    //      Source      - defines an operator()() returning a range
+    //
     template <class Iterator, class Source>
     struct pull
         : boost::base_from_member<Source>
@@ -85,8 +107,8 @@ namespace breeze { namespace iterator {
 
         void fill_from_source()
         {
-            boost::tie(this->base_reference(), this->last_) =
-                this->member();
+            detail::expand_range(this->member(), this->base_reference(),
+                this->last_);
         }
 
         Iterator last_;
