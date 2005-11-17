@@ -12,7 +12,6 @@
 #include <breeze/static_assert.hpp>
 
 #include <boost/assert.hpp>
-#include <boost/utility/base_from_member.hpp>
 #include <boost/type_traits/is_convertible.hpp>
 
 #include <boost/iterator/iterator_adaptor.hpp>
@@ -45,33 +44,38 @@ namespace breeze { namespace iterator {
     //
     template <class Iterator, class Source>
     struct pull
-        : boost::base_from_member<Source>
-        , boost::iterator_adaptor<
+        : boost::iterator_adaptor<
             pull<Iterator, Source>,
             Iterator,
             boost::use_default,
             std::input_iterator_tag
         >
     {
+        typedef Source source_type;
+        typedef typename boost::add_reference<source_type>::type
+            source_reference;
+        typedef typename boost::add_reference<typename boost::add_const<
+            source_type>::type>::type source_const_reference;
+
         pull()
         {
             this->fill_from_source();
         }
 
-        pull(Source const & src)
-            : source_base(src)
+        pull(source_const_reference src)
+            : source_(src)
         {
             this->fill_from_source();
         }
 
-        Source & source()
+        source_reference source()
         {
-            return this->member;
+            return this->source_;
         }
 
-        Source const & source() const
+        source_const_reference source() const
         {
-            return this->member;
+            return this->source_;
         }
 
     private:
@@ -87,9 +91,6 @@ namespace breeze { namespace iterator {
         friend class boost::iterator_core_access;
 
         typedef typename pull::iterator_adaptor_ iterator_adaptor_;
-        typedef boost::base_from_member<Source> source_base;
-
-        using source_base::member;
 
         void increment()
         {
@@ -107,11 +108,12 @@ namespace breeze { namespace iterator {
 
         void fill_from_source()
         {
-            detail::expand_range(this->member(), this->base_reference(),
+            detail::expand_range(this->source_(), this->base_reference(),
                 this->last_);
         }
 
         Iterator last_;
+        source_type source_;
     };
 
 }} // namespace breeze::iterator

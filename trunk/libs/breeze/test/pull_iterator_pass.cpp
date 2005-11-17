@@ -66,7 +66,6 @@ struct no_skip_tokenizer
         return std::pair<char const *, char const *>(first, last);
     }
 
-private:
     char const * next_;
 };
 
@@ -77,30 +76,29 @@ struct string_merger
     {
     }
 
-    std::pair<char const*, char const *> operator()()
+    std::string operator()()
     {
         ++counter;
-
-        char const * first = *strings_, * last = 0;
-
-        ++strings_;
-
-        if (first)
+        if (strings_ && *strings_)
         {
-            last = first + std::strlen(first);
+            return std::string(*strings_++);
         }
-
-        return std::pair<char const *, char const *>(first, last);
+        else
+        {
+            return std::string();
+        }
     }
 
-private:
     char const ** strings_;
 };
 
 int main()
 {
     typedef breeze::iterator::pull<char const *, no_skip_tokenizer> test_type1;
-    typedef breeze::iterator::pull<char const *, string_merger> test_type2;
+    typedef breeze::iterator::pull<std::string::const_iterator, string_merger>
+        test_type2;
+    typedef breeze::iterator::pull<std::string::const_iterator, string_merger &>
+        test_type3;
 
     breeze::test::std_iterator_traits<test_type1>();
 
@@ -110,24 +108,31 @@ int main()
         char const * begin = test_string.c_str();
         while ('\0' != *begin)
         {
-            assert(*begin == *piecewise_test_string);
-
+            assert(*begin == *piecewise_test_string && "Test failed!");
             ++begin;
             ++piecewise_test_string;
         }
+        assert(7 == counter && "Test failed!");
     }
-
-    assert(7 == counter && "Test failed!");
 
     piecewise_test_string = test_type1(test_string.c_str());
 
     assert(std::equal(test_string.begin(), test_string.end(),
-        piecewise_test_string));
-
+        piecewise_test_string) && "Test failed!");
     assert(14 == counter && "Test failed!");
 
     assert(std::equal(test_string.begin(), test_string.end(),
-        test_type2(string_merger(broken_string))));
-
+        test_type2(string_merger(broken_string))) && "Test failed!");
     assert(27 == counter && "Test failed!");
+
+    assert(std::equal(test_string.begin(), test_string.end(),
+        test_type2(string_merger(broken_string))) && "Test failed!");
+    assert(40 == counter && "Test failed!");
+
+    string_merger merge_broken_string(broken_string);
+    assert(std::equal(test_string.begin(), test_string.end(),
+        test_type3(merge_broken_string)) && "Test failed!");
+    assert(53 == counter && "Test failed!");
+    assert(std::string() == merge_broken_string() && "Test failed!");
+    assert(&test_type3(merge_broken_string).source() == &merge_broken_string);
 }
