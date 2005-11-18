@@ -17,6 +17,11 @@
 
 namespace breeze { namespace debug {
 
+    //
+    //  Tag template parameter is meant to appear in assertions generated in
+    //  debug builds. Accordingly, it should be set to a type that relates to
+    //  the client code of this class.
+    //
     template <class Tag = void>
     struct counter
     {
