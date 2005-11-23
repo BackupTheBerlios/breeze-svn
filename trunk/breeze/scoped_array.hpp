@@ -13,23 +13,11 @@
 #include <breeze/detail/trivial_iterator_tag.hpp>
 
 #include <boost/iterator/iterator_traits.hpp>
+#include <boost/checked_delete.hpp>
 
 #include <iterator>
 
 namespace breeze {
-
-    namespace detail {
-
-        struct scoped_array_deleter
-        {
-            template <class T>
-            void operator()(T * p)
-            {
-                delete [] p;
-            }
-        };
-
-    } // namespace detail
 
     template <
         class T,
@@ -39,11 +27,11 @@ namespace breeze {
     >
     struct scoped_array
         : scoped_ptr<T, Pointer, Reference, typename filter_default<Deleter,
-            detail::scoped_array_deleter>::type >
+            boost::checked_array_deleter<T> >::type >
     {
     private:
         typedef scoped_ptr<T, Pointer, Reference, typename filter_default<
-            Deleter, detail::scoped_array_deleter>::type > scoped_ptr_base_;
+            Deleter, boost::checked_array_deleter<T> >::type > scoped_ptr_base_;
 
     public:
         typedef typename scoped_ptr_base_::pointer pointer;

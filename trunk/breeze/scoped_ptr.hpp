@@ -16,6 +16,7 @@
 #include <boost/iterator/iterator_traits.hpp>
 #include <boost/type_traits/add_pointer.hpp>
 #include <boost/indirect_reference.hpp>
+#include <boost/checked_delete.hpp>
 #include <boost/compressed_pair.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/assert.hpp>
@@ -23,19 +24,6 @@
 #include <algorithm> // std::swap
 
 namespace breeze {
-
-    namespace detail {
-
-        struct scoped_ptr_deleter
-        {
-            template <class T>
-            void operator()(T * p)
-            {
-                delete p;
-            }
-        };
-
-    } // namespace detail
 
     template <
         class T,
@@ -52,7 +40,7 @@ namespace breeze {
             element_type>::type>::type pointer;
         typedef typename filter_default<Reference, typename
             boost::iterator_reference<pointer>::type>::type reference;
-        typedef typename filter_default<Deleter, detail::scoped_ptr_deleter
+        typedef typename filter_default<Deleter, boost::checked_deleter<T>
             >::type deleter_type;
 
     private:

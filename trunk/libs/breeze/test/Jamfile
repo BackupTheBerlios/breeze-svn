@@ -33,6 +33,7 @@ test-suite "breeze.iterator.pull" :
 
 test-suite "breeze.scoped_array" :
     [ test run : scoped_array_pass ]
+    [ test compile-fail : scoped_array_fail ]
     ;
 
 test-suite "breeze.scoped_ptr" :
@@ -41,6 +42,7 @@ test-suite "breeze.scoped_ptr" :
     [ test run : scoped_ptr_pass_3 ]
     [ test run-fail : scoped_ptr_fail_1 ]
     [ test run-fail : scoped_ptr_fail_2 ]
+    [ test compile-fail : scoped_ptr_fail_3 ]
     ;
 
 test-suite "breeze.static_assert" :
