@@ -97,6 +97,8 @@ namespace breeze {
 
         void after_destructor()
         {
+            //  Note: data is stored lazily, thus any given instance may have no
+            //      data attached.
             store_.get().erase(this);
         }
 

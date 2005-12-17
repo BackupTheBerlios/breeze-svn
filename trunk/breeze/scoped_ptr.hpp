@@ -53,7 +53,6 @@ namespace breeze {
         typedef boost::compressed_pair<pointer, deleter_type> data_type;
 
     public:
-
         explicit scoped_ptr(
             pointer p = pointer(),
             deleter_type const & d = deleter_type()
