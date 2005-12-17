@@ -45,6 +45,12 @@ test-suite "breeze.scoped_ptr" :
     [ test compile-fail : scoped_ptr_fail_3 ]
     ;
 
+test-suite "breeze.shared_proxy" :
+    [ test run : shared_proxy_pass_1 ]
+    [ test run : shared_proxy_pass_2 ]
+    [ test run-fail : shared_proxy_fail ]
+    ;
+
 test-suite "breeze.static_assert" :
     [ test compile : static_assert_pass ]
     [ test compile-fail : static_assert_fail ]
