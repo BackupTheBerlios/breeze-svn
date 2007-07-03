@@ -10,6 +10,10 @@ import breeze-testing : test ;
 
 project test ;
 
+test-suite "breeze.allocator" :
+    [ test run : counting_allocator_pass ]
+    ;
+
 test-suite "breeze.bool_type" :
     [ test run : bool_type_pass ]
     [ test compile-fail : bool_type_fail_1 ]
