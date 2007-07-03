@@ -42,6 +42,14 @@ namespace breeze { namespace debug {
             return counter_;
         }
 
+        //
+        //  NOTE: A race condition exists with the debug assertions in both
+        //  increment and decrement, below. The race condition could allow
+        //  over and underflows to go undetected, even in a debug build. This
+        //  would only be true for a given sequence of events. Now, how likely
+        //  is that?... :-p
+        //
+
         void increment()
         {
             struct check_value
@@ -54,8 +62,8 @@ namespace breeze { namespace debug {
                 }
             };
 
-            check_value check(counter_);
-            ++counter_;
+            check_value check(counter_);    // RACE!
+            ++counter_;                     // (see NOTE above)
         }
 
         bool decrement()
@@ -71,8 +79,8 @@ namespace breeze { namespace debug {
                 }
             };
 
-            check_value check(counter_);
-            return --counter_;
+            check_value check(counter_);    // RACE!
+            return --counter_;              // (see NOTE above)
         }
 
     private:
