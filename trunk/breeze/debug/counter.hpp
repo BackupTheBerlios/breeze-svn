@@ -9,6 +9,8 @@
 #if !defined(BREEZE_DEBUG_COUNTER_HPP_INCLUDED)
 #define BREEZE_DEBUG_COUNTER_HPP_INCLUDED
 
+#include <breeze/debug/unused_variable.hpp>
+
 #include <boost/detail/atomic_count.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/assert.hpp>
@@ -42,17 +44,35 @@ namespace breeze { namespace debug {
 
         void increment()
         {
-            BOOST_ASSERT((boost::int32_t)(counter_ + 1) > counter_
-                && "Counter overflow.");
+            struct check_value
+            {
+                check_value (boost::int32_t count)
+                {
+                    BOOST_ASSERT((boost::int32_t)(count + 1) > count
+                        && "Counter overflow.");
+                    unused_variable(count);
+                }
+            };
+
+            check_value check(counter_);
             ++counter_;
         }
 
-        void decrement()
+        bool decrement()
         {
-            BOOST_ASSERT((boost::int32_t)(counter_ - 1) < counter_
-                && "Counter underflow.");
-            BOOST_ASSERT(counter_ > 0 && "Counter underflow.");
-            --counter_;
+            struct check_value
+            {
+                check_value(boost::int32_t count)
+                {
+                    BOOST_ASSERT(count > 0 && "Counter underflow.");
+                    BOOST_ASSERT((boost::int32_t)(count - 1) < count
+                        && "Counter underflow.");
+                    unused_variable(count);
+                }
+            };
+
+            check_value check(counter_);
+            return --counter_;
         }
 
     private:
